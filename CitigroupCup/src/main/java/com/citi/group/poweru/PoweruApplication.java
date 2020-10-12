@@ -7,7 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@MapperScan("com.citi.group.poweru.module.dao.mapper")
+@MapperScan("com.citi.group.poweru.module.dao")
 public class PoweruApplication {
 
     public static void main(String[] args) {
