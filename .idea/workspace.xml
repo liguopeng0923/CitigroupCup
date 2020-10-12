@@ -2,13 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="51013d3d-275e-4f04-a7bc-4070f678ccfd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CitigroupCup/src/main/java/com/citi/group/poweru/module/dao/UserMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CitigroupCup/src/main/java/com/citi/group/poweru/module/domain/entity/PasswordEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CitigroupCup/src/main/java/com/citi/group/poweru/module/domain/entity/UserEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_core_3_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_1_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_validation_jakarta_validation_api_2_0_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CitigroupCup/src/main/java/com/citi/group/poweru/module/domain/vo/RegisterVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CitigroupCup/src/main/java/com/citi/group/poweru/module/domain/vo/UserVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CitigroupCup/src/main/java/com/citi/group/poweru/module/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CitigroupCup/src/main/java/com/citi/group/poweru/module/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_projectreactor_reactor_core_3_3_10_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_reactivestreams_reactive_streams_1_0_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_commons_2_3_4_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_keyvalue_2_3_4_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_redis_2_3_4_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_integration_spring_integration_core_5_3_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_integration_spring_integration_redis_5_2_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_retry_spring_retry_1_2_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_messaging_5_2_9_RELEASE.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CitigroupCup/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CitigroupCup/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CitigroupCup/src/main/java/com/citi/group/poweru/PoweruApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/CitigroupCup/src/main/java/com/citi/group/poweru/PoweruApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CitigroupCup/src/main/java/com/citi/group/poweru/module/dao/entity/UserEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CitigroupCup/src/main/java/com/citi/group/poweru/config/DruidDBConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CitigroupCup/src/main/java/com/citi/group/poweru/config/HttpMessageConverterConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CitigroupCup/src/main/java/com/citi/group/poweru/config/OkHttpConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CitigroupCup/src/main/java/com/citi/group/poweru/config/RedisLockConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CitigroupCup/src/main/java/com/citi/group/poweru/module/dao/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/CitigroupCup/src/main/java/com/citi/group/poweru/module/dao/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CitigroupCup/src/main/java/com/citi/group/poweru/module/domain/entity/PasswordEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CitigroupCup/src/main/java/com/citi/group/poweru/module/domain/entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/CitigroupCup/src/main/java/com/citi/group/poweru/module/domain/entity/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CitigroupCup/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/CitigroupCup/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CitigroupCup/src/test/java/com/citi/group/poweru/PoweruApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/CitigroupCup/src/test/java/com/citi/group/poweru/PoweruApplicationTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +40,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -46,15 +68,38 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../实验室/后端/server" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../梦想珈/CPTMP-Backend" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.PoweruApplicationTests.contextLoads">
+    <configuration name="PoweruApplicationTests.contextLoads" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="poweru" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.citi.group.poweru.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.citi.group.poweru" />
+      <option name="MAIN_CLASS_NAME" value="com.citi.group.poweru.PoweruApplicationTests" />
+      <option name="METHOD_NAME" value="contextLoads" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PoweruApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="CitigroupCup" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.citi.group.poweru.PoweruApplication" />
@@ -62,6 +107,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.PoweruApplicationTests.contextLoads" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -75,6 +125,7 @@
       <updated>1602491065495</updated>
       <workItem from="1602491071328" duration="1188000" />
       <workItem from="1602493071205" duration="958000" />
+      <workItem from="1602497897064" duration="8323000" />
     </task>
     <servers />
   </component>
@@ -85,18 +136,58 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="527" y="52" key="#com.intellij.ide.util.MemberChooser" timestamp="1602500911053">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="527" y="52" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1602500911053" />
     <state x="279" y="323" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1602493151398">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="279" y="323" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1602493151398" />
-    <state x="496" y="109" key="FileChooserDialogImpl" timestamp="1602493432267">
+    <state x="433" y="99" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1602501439105">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="496" y="109" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1602493432267" />
-    <state x="183" y="0" key="Maven.ArtifactSearchDialog" timestamp="1602493389847">
+    <state x="433" y="99" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1602501439105" />
+    <state x="496" y="109" key="FileChooserDialogImpl" timestamp="1602505906077">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="183" y="0" key="Maven.ArtifactSearchDialog/0.0.1536.824@0.0.1536.824" timestamp="1602493389847" />
+    <state x="496" y="109" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1602505906077" />
+    <state width="1483" height="438" key="GridCell.Tab.0.bottom" timestamp="1602506225866">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1483" height="438" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602506225866" />
+    <state width="1483" height="438" key="GridCell.Tab.0.center" timestamp="1602506225865">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1483" height="438" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1602506225865" />
+    <state width="1483" height="438" key="GridCell.Tab.0.left" timestamp="1602506225865">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1483" height="438" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1602506225865" />
+    <state width="1483" height="438" key="GridCell.Tab.0.right" timestamp="1602506225866">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1483" height="438" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1602506225866" />
+    <state width="1483" height="234" key="GridCell.Tab.1.bottom" timestamp="1602504744864">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1483" height="234" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602504744864" />
+    <state width="1483" height="234" key="GridCell.Tab.1.center" timestamp="1602504744864">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1483" height="234" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1602504744864" />
+    <state width="1483" height="234" key="GridCell.Tab.1.left" timestamp="1602504744864">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1483" height="234" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1602504744864" />
+    <state width="1483" height="234" key="GridCell.Tab.1.right" timestamp="1602504744864">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1483" height="234" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1602504744864" />
+    <state x="183" y="0" key="Maven.ArtifactSearchDialog" timestamp="1602500105841">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="183" y="0" key="Maven.ArtifactSearchDialog/0.0.1536.824@0.0.1536.824" timestamp="1602500105841" />
     <state x="121" y="0" key="SettingsEditor" timestamp="1602493185343">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
