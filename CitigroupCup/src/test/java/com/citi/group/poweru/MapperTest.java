@@ -46,8 +46,7 @@ public class MapperTest {
         List<Integer> months = new ArrayList<Integer>();
         months.add(9);
         months.add(10);
-        vo.setMonths(months);
-        vo.setUserId((long)10086);
+        vo.setUserId((long)1);
         vo.setYear(2020);
         System.out.println(userService.queryStatisticalDataOfMonthGeneration(vo));
     }

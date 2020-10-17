@@ -123,17 +123,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<QueryRankDto> queryStatisticalDataOfMonthGeneration(QueryRankVo queryRankVo) {
         //存放结果
-        List<QueryRankDto> result = new ArrayList<QueryRankDto>();
-        //存放每天发电量
+        List<QueryRankDto> result = new ArrayList<>();
+        //存放每天发电量,key代表日期,value表示发电量
         Map<Integer, Double> generationPerDay;
         //存放用户对应的发电基站
         List<Long> pointIdList = relationMapper.queryPointIdByUser(queryRankVo.getUserId());
-        //获取用户需要查询的月份
-        List<Integer> months = queryRankVo.getMonths();
 
         //查询发电量数据
-        for(Integer month:months) {
-            generationPerDay = new  HashMap<Integer,Double>();
+        for(int month = 1;month<=12;month++) {
+            generationPerDay = new  HashMap<>(31);
             for (int i = 1; i <= 31; i++) {
                 //用户每天发电
                 Double dayGenerationOfUser = 0.0;
@@ -148,20 +146,31 @@ public class UserServiceImpl implements UserService {
                     generationPerDay.put(i, dayGenerationOfUser);
                 }
             }
+            System.out.println(generationPerDay);
             QueryRankDto dto=new QueryRankDto();
             //设置当前查询月份
             dto.setMonth(month);
-            Map.Entry<Integer,Double> entry = StatisticalUtil.getMax(generationPerDay);
-            //设置最大值和对应的日期
-            dto.setMaxDay(entry.getKey());
-            dto.setMax(entry.getValue());
-            entry = StatisticalUtil.getMin(generationPerDay);
-            //设置最大值和对应的日期
-            dto.setMinDay(entry.getKey());
-            dto.setMin(entry.getValue());
-            //设置平均值
-            Integer daysOfMonth = StatisticalUtil.getDaysOfMonth(queryRankVo.getYear(),month);
-            dto.setAverage(StatisticalUtil.getAverage(generationPerDay,daysOfMonth));
+            //本月未发电则所有信息为0
+            if(generationPerDay.isEmpty()){
+                dto.setMin(0.0);
+                dto.setMinDay(0);
+                dto.setMax(0.0);
+                dto.setMaxDay(0);
+                dto.setAverage(0.0);
+            }
+            else {
+                Map.Entry<Integer, Double> entry = StatisticalUtil.getMax(generationPerDay);
+                //设置最大值和对应的日期
+                dto.setMaxDay(entry.getKey());
+                dto.setMax(entry.getValue());
+                entry = StatisticalUtil.getMin(generationPerDay);
+                //设置最大值和对应的日期
+                dto.setMinDay(entry.getKey());
+                dto.setMin(entry.getValue());
+                //设置平均值
+                Integer daysOfMonth = StatisticalUtil.getDaysOfMonth(queryRankVo.getYear(), month);
+                dto.setAverage(StatisticalUtil.getAverage(generationPerDay, daysOfMonth));
+            }
             result.add(dto);
         }
         return result;

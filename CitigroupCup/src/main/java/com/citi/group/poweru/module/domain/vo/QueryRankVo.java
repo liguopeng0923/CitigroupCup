@@ -18,7 +18,13 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class QueryRankVo {
+    /**
+     * 用户编号
+     */
     Long userId;
+
+    /**
+     * 查询的年份
+     */
     Integer year;
-    List<Integer> months;
 }
