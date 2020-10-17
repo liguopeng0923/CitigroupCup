@@ -22,7 +22,6 @@ import java.util.Date;
 @Builder
 @TableName(value = "power_generation_info")
 public class PowerGenerationRecordEntity {
-
     @TableId(value = "record_id")
     private Long recordId;
 

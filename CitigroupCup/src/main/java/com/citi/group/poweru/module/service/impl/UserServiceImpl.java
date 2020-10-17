@@ -1,9 +1,6 @@
 package com.citi.group.poweru.module.service.impl;
 
-import com.citi.group.poweru.module.dao.PointMapper;
-import com.citi.group.poweru.module.dao.PowerGenerationMapper;
-import com.citi.group.poweru.module.dao.RelationMapper;
-import com.citi.group.poweru.module.dao.UserMapper;
+import com.citi.group.poweru.module.dao.*;
 import com.citi.group.poweru.module.domain.dto.PointInfoDto;
 import com.citi.group.poweru.module.domain.dto.PowerGenerationRecordDto;
 import com.citi.group.poweru.module.domain.dto.QueryRankDto;
@@ -11,6 +8,7 @@ import com.citi.group.poweru.module.domain.entity.DayPower;
 import com.citi.group.poweru.module.domain.entity.PointInfoEntity;
 import com.citi.group.poweru.module.domain.entity.PowerGenerationRecordEntity;
 import com.citi.group.poweru.module.domain.entity.UserEntity;
+import com.citi.group.poweru.module.domain.vo.BindVo;
 import com.citi.group.poweru.module.domain.vo.QueryRankVo;
 import com.citi.group.poweru.module.domain.vo.RegisterVo;
 import com.citi.group.poweru.module.domain.vo.UserVo;
@@ -32,6 +30,9 @@ import java.util.*;
 @Transactional(rollbackFor={RuntimeException.class, Exception.class})
 public class UserServiceImpl implements UserService {
     @Resource
+    private MachineMapper machineMapper;
+
+    @Resource
     private UserMapper userMapper;
 
     @Resource
@@ -48,7 +49,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserVo register(RegisterVo registerVo) {
         UserEntity userEntity = UserEntity.builder()
-                .name(registerVo.getNickname())
                 .phone(registerVo.getLoginNumber())
                 .password(registerVo.getPassword())
                 .access(0)
@@ -179,14 +179,33 @@ public class UserServiceImpl implements UserService {
         for (long id:pointIdList){
             PointInfoDto dto = new PointInfoDto();
             PointInfoEntity infoEntity = pointMapper.queryPointInfo(id);
-            dto.setPointId(id);
+            dto.setName(infoEntity.getName());
+            dto.setAddress(infoEntity.getAddress());
             dto.setTotalGeneration(generationMapper.getTotalGenerationPerPoint(id));
             dto.setStatus(infoEntity.getStatus());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            dto.setUpdateTime(sdf.format(infoEntity.getUpdate_time()));
+            dto.setUploadTime(sdf.format(infoEntity.getUpload_time()));
             result.add(dto);
         }
         return result;
+    }
+
+
+    /**
+     * 绑定用户和基点
+     * @param bindVo 绑定信息
+     */
+    @Override
+    public void userBindPoint(BindVo bindVo){
+        Long machineId = machineMapper.selectMachineId(bindVo.getActivationCode());
+        PointInfoEntity pointInfoEntity = new PointInfoEntity();
+        pointInfoEntity.setName(bindVo.getName());
+        pointInfoEntity.setStatus("关闭");
+        pointInfoEntity.setMachineId(machineId);
+        pointInfoEntity.setAddress(bindVo.getAddress());
+        pointMapper.insertPoint(pointInfoEntity);
+
+        relationMapper.insertUserAndPointRelation(bindVo.getUserId(),pointInfoEntity.getPointId());
     }
 
 }

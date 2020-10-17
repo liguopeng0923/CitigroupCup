@@ -1,5 +1,6 @@
 package com.citi.group.poweru;
 
+import com.citi.group.poweru.module.domain.vo.BindVo;
 import com.citi.group.poweru.module.domain.vo.PowerGenerationRecordVo;
 import com.citi.group.poweru.module.service.AdminService;
 import com.citi.group.poweru.module.service.UploaderService;
@@ -31,7 +32,7 @@ public class ServiceTest {
 
     @Test
     public void userServiceTest(){
-        System.out.println(userService.queryPointsInfoByUser((long)10086));
+        System.out.println(userService.queryPointsInfoByUser((long)1));
     }
 
 
@@ -49,5 +50,15 @@ public class ServiceTest {
     @Test
     public void adminTest(){
         System.out.println(adminService.queryPointInfoByAdmin((long)2020001));
+    }
+
+    @Test
+    public void bindTest(){
+        BindVo bindVo = new BindVo();
+        bindVo.setActivationCode("s004");
+        bindVo.setAddress("广八路");
+        bindVo.setName("5号基点");
+        bindVo.setUserId((long)2);
+        userService.userBindPoint(bindVo);
     }
 }

@@ -33,4 +33,5 @@ public class PowerGenerationRecordDto {
      * 数据上传时间
      */
     private String uploadTime;
+
 }

@@ -25,7 +25,6 @@ public interface RelationMapper {
     @Insert("insert into user_point_relation (user_id,point_id)values(#{userId},#{pointId})")
     public void insertUserAndPointRelation(@Param("userId") Long userId,@Param("pointId") Long pointId);
 
-
     /**
      * 查询当前管理员绑定的所有用户id
      * @param adminId 管理员id

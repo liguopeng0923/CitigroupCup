@@ -1,10 +1,7 @@
 package com.citi.group.poweru.module.dao;
 
 import com.citi.group.poweru.module.domain.entity.PointInfoEntity;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -21,6 +18,10 @@ public interface PointMapper {
     @Select("select * from point_info where point_id=#{pointId}")
     public PointInfoEntity queryPointInfo(@Param("pointId")Long pointId);
 
-    @Update("update point_info set update_time=#{updateTime} where point_id=#{pointId}")
-    public void updatePointTime(@Param("updateTime")String  updateTime, @Param("pointId")Long pointId);
+    @Update("update point_info set upload_time=#{uploadTime} where point_id=#{pointId}")
+    public void updatePointTime(@Param("uploadTime")String  uploadTime, @Param("pointId")Long pointId);
+
+    @Insert("INSERT INTO point_info (`name`, `address`, `status`, `upload_time`, `machine_id`) VALUES (#{name},#{address},#{status},#{upload_time},#{machineId})")
+    @Options(useGeneratedKeys=true, keyProperty="pointId", keyColumn="point_id")
+    public void insertPoint(PointInfoEntity pointInfoEntity);
 }

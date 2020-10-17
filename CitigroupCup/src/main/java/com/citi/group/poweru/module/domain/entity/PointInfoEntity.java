@@ -28,13 +28,26 @@ public class PointInfoEntity {
      * 发电基站编号
      */
     @TableId(value = "point_id")
-    private Long point_id;
+    private Long pointId;
 
     /**
      * 基站地址
      */
     @TableField(value = "address")
     private String address;
+
+    /**
+     * 基站名称
+     */
+    @TableField(value = "name")
+    private String name;
+
+
+    /**
+     * 基站设备id
+     */
+    @TableField(value = "machine_id")
+    private Long machineId;
 
     /**
      * 基站状态
@@ -45,7 +58,7 @@ public class PointInfoEntity {
     /**
      * 上一次更新时间
      */
-    @TableField(value = "update_time")
+    @TableField(value = "upload_time")
     @JsonFormat(pattern = "yyyy-MM-dd hh:MM:ss")
-    private Date update_time;
+    private Date upload_time;
 }

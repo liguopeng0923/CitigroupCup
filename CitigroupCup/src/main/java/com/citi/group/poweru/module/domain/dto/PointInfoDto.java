@@ -19,9 +19,14 @@ import java.util.Date;
 @Builder
 public class PointInfoDto {
     /**
-     * 基点编号
+     * 基点名称
      */
-    private Long pointId;
+    private String name;
+
+    /**
+     * 基点地址
+     */
+    private String address;
 
     /**
      * 基点总发电量
@@ -36,6 +41,10 @@ public class PointInfoDto {
     /**
      * 基点信息上一次更新时间
      */
+    private String uploadTime;
 
-    private String updateTime;
+    /**
+     * 基站拥有者姓名
+     */
+    private String userName;
 }

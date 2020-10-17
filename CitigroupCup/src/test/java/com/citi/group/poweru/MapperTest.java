@@ -1,9 +1,11 @@
 package com.citi.group.poweru;
 
+import com.citi.group.poweru.module.dao.MachineMapper;
 import com.citi.group.poweru.module.dao.PointMapper;
 import com.citi.group.poweru.module.dao.PowerGenerationMapper;
 import com.citi.group.poweru.module.dao.RelationMapper;
 import com.citi.group.poweru.module.domain.dto.QueryRankDto;
+import com.citi.group.poweru.module.domain.entity.PointInfoEntity;
 import com.citi.group.poweru.module.domain.entity.PowerGenerationRecordEntity;
 import com.citi.group.poweru.module.domain.vo.QueryRankVo;
 import com.citi.group.poweru.module.service.UploaderService;
@@ -24,6 +26,9 @@ import java.util.List;
  */
 @SpringBootTest
 public class MapperTest {
+    @Resource
+    private MachineMapper machineMapper;
+
     @Resource
     private RelationMapper relationMapper;
 
@@ -69,12 +74,28 @@ public class MapperTest {
 
     @Test
     public void insertRelationTest(){
-        relationMapper.insertUserAndPointRelation((long)12345,(long)3);
+        relationMapper.insertUserAndPointRelation((long)2,(long)3);
+    }
+
+    @Test
+    public void machineTest(){
+        System.out.println(machineMapper.selectMachineId("s004"));
     }
 
 
     @Test
     public void relationTest(){
         System.out.println(relationMapper.queryUserIdByAdmin((long)2020001));
+    }
+
+
+    @Test
+    public void insertPoint(){
+        PointInfoEntity entity = new PointInfoEntity();
+        entity.setAddress("九华山");
+        entity.setMachineId((long)1004);
+        entity.setName("2号");
+        entity.setStatus("关闭");
+        pointMapper.insertPoint(entity);
     }
 }

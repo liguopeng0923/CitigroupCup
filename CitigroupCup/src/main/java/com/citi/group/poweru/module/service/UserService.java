@@ -4,6 +4,7 @@ import com.citi.group.poweru.module.domain.dto.PointInfoDto;
 import com.citi.group.poweru.module.domain.dto.PowerGenerationRecordDto;
 import com.citi.group.poweru.module.domain.dto.QueryRankDto;
 import com.citi.group.poweru.module.domain.entity.PowerGenerationRecordEntity;
+import com.citi.group.poweru.module.domain.vo.BindVo;
 import com.citi.group.poweru.module.domain.vo.QueryRankVo;
 import com.citi.group.poweru.module.domain.vo.RegisterVo;
 import com.citi.group.poweru.module.domain.vo.UserVo;
@@ -32,4 +33,6 @@ public interface UserService {
     List<QueryRankDto> queryStatisticalDataOfMonthGeneration(QueryRankVo queryRankVo);
 
     List<PointInfoDto> queryPointsInfoByUser(Long userId);
+
+    void userBindPoint(BindVo bindVo);
 }

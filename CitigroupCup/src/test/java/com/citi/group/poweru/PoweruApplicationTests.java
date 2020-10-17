@@ -17,7 +17,6 @@ class PoweruApplicationTests {
     @Test
     void contextLoads() {
         RegisterVo registerVo = RegisterVo.builder()
-                .nickname("11")
                 .loginNumber("1234567")
                 .password("222222222")
                 .build();

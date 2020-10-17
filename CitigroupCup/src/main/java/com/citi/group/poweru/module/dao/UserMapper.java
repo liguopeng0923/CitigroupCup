@@ -32,6 +32,6 @@ public interface UserMapper {
     @Select("select * from user where phone = #{phone} and password = #{password}")
     UserEntity selectByPhoneAndPassword(@Param("phone") String phone, @Param("password") String password);
 
-    @Select("select * from user where name=#{name}")
-    public UserEntity selectUserByName(String name);
+    @Select("select real_name from user where id=#{userId}")
+    public String getUserName(Long userId);
 }

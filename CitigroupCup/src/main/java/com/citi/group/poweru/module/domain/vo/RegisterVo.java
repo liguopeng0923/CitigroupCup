@@ -26,18 +26,18 @@ import java.util.Date;
 public class RegisterVo {
 
     //昵称不能为空
-    @NotNull(message = "昵称不能为空")
-    @Size(max = 32,message = "昵称最多为32个字符")
-    private String nickname;
+//    @NotNull(message = "昵称不能为空")
+//    @Size(max = 32,message = "昵称最多为32个字符")
+//    private String nickname;
 
     //账号（手机号）
     @NotNull(message = "账号不能为空")
-    @Size(max = 32,message = "账号最多为32个字符")
+    @Size(max = 11,min = 11,message = "账号最多为32个字符")
     private String loginNumber;
 
     //密码
     @NotBlank(message = "密码不能为空")
-    @Min(value = 8, message = "密码最少为8个字符")
+    @Min(value = 6, message = "密码最少为8个字符")
     @Max(value = 32, message = "密码最多为32个字符")
     private String password;
 
