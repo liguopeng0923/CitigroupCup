@@ -1,7 +1,7 @@
-package com.dream.handler;
+package com.citi.group.poweru.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.dream.common.domain.ResponseDTO;
+import com.citi.group.poweru.common.domain.ResponseDTO;
 import lombok.SneakyThrows;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;

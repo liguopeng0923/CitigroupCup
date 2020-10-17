@@ -1,4 +1,4 @@
-package com.dream.common.constant;
+package com.citi.group.poweru.common.constant;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,7 @@
-package com.dream.common.domain;
+package com.citi.group.poweru.common.domain;
 
 import com.alibaba.fastjson.JSON;
-import com.dream.common.constant.ResponseCodeConst;
+import com.citi.group.poweru.common.constant.ResponseCodeConst;
 import lombok.Data;
 
 /**
