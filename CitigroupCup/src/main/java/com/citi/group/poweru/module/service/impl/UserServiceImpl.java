@@ -1,5 +1,6 @@
 package com.citi.group.poweru.module.service.impl;
 
+import com.citi.group.poweru.common.exception.BusinessException;
 import com.citi.group.poweru.module.dao.*;
 import com.citi.group.poweru.module.domain.dto.PointInfoDto;
 import com.citi.group.poweru.module.domain.dto.PowerGenerationRecordDto;
@@ -62,26 +63,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserVo login(String loginNumber, String password) {
-//        UserEntity userEntity = userMapper.selectByPhoneAndPassword(loginNumber, password);
-//        if(Objects.nonNull(userEntity)){
-//            return UserVo.builder()
-//                    .id()
-//                    .phone()
-//                    .address()
-//                    .birthday()
-//                    .cardId()
-//                    .contactName()
-//                    .credit()
-//                    .email()
-//                    .gender()
-//                    .information()
-//                    .name()
-//                    .photo()
-//                    .profit()
-//                    .realName()
-//                    .build()
-//        }
-        return null;
+        UserEntity userEntity = userMapper.selectByPhoneAndPassword(loginNumber, password);
+        if(Objects.nonNull(userEntity)){
+            return UserVo.builder()
+                    .id(userEntity.getId())
+                    .phone(userEntity.getPhone())
+                    .address(userEntity.getAddress())
+                    .birthday(userEntity.getBirthday())
+                    .cardId(userEntity.getCardId())
+                    .contactName(userEntity.getContactName())
+                    .credit(userEntity.getCredit())
+                    .email(userEntity.getEmail())
+                    .gender(userEntity.getGender())
+                    .information(userEntity.getInformation())
+                    .name(userEntity.getName())
+                    .photo(userEntity.getPhoto())
+                    .profit(userEntity.getProfit())
+                    .realName(userEntity.getRealName())
+                    .build();
+        }
+        throw new BusinessException("未找到该用户");
     }
 
     /**

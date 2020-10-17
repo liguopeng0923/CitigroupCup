@@ -93,6 +93,6 @@ public class UserVo {
     /**
      *收益
      */
-    private Integer profit;
+    private Double profit;
 
 }
