@@ -19,9 +19,6 @@ public class StatisticalUtil {
      * @return
      */
     public static Map.Entry<Integer,Double> getMax(Map<Integer,Double> dataMap){
-        if (dataMap == null) {
-            return null;
-        }
         Map<Integer,Double> map = new HashMap<Integer,Double>(1);
 
         List<Map.Entry<Integer,Double>> list = new ArrayList(dataMap.entrySet());

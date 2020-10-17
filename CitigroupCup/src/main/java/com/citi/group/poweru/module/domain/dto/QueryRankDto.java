@@ -16,10 +16,33 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class QueryRankDto {
+    /**
+     * 当前数据所属月份
+     */
     private Integer month;
+
+    /**
+     * 本月发电量最大日期
+     */
     private Integer maxDay;
+
+    /**
+     * 本月发电量最大值
+     */
     private Double max;
+
+    /**
+     * 本月发电量最小日期
+     */
     private Integer minDay;
+
+    /**
+     * 本月发电量最小值
+     */
     private Double min;
+
+    /**
+     * 本月发电量平均值
+     */
     private Double average;
 }
