@@ -36,7 +36,9 @@ public class UploaderServiceImpl implements UploaderService {
         record.setPointId(powerGenerationRecord.getPointId());
         record.setTimeInterval(powerGenerationRecord.getTimeInterval());
         record.setUploadTime(powerGenerationRecord.getUploadTime());
+        //上传记录
         generationMapper.uploadRecord(record);
+        //更新基点状态
         pointMapper.updatePointTime(powerGenerationRecord.getUploadTime(),powerGenerationRecord.getPointId());
     }
 }
