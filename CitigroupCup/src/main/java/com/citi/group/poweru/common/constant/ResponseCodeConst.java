@@ -1,4 +1,4 @@
-package com.dream.common.constant;
+package com.citi.group.poweru.common.constant;
 
 import lombok.extern.slf4j.Slf4j;
 

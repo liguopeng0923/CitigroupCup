@@ -1,4 +1,4 @@
-package com.dream.common.exception;
+package com.citi.group.poweru.common.exception;
 
 import lombok.Getter;
 
