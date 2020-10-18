@@ -15,6 +15,7 @@ import com.citi.group.poweru.module.domain.vo.RegisterVo;
 import com.citi.group.poweru.module.domain.vo.UserVo;
 import com.citi.group.poweru.module.service.UserService;
 import com.citi.group.poweru.util.StatisticalUtil;
+import org.apache.tomcat.jni.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,27 +50,45 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserVo register(RegisterVo registerVo) {
+
+        if(!Objects.isNull(userMapper.selectByPhone(registerVo.getPhone()))){
+            throw new BusinessException("该手机号已被注册");
+        }
+        if(!Objects.isNull(userMapper.selectByEmail(registerVo.getEmail()))){
+            throw new BusinessException("该邮箱已被注册");
+        }
         UserEntity userEntity = UserEntity.builder()
-                .phone(registerVo.getLoginNumber())
+                .phone(registerVo.getPhone())
+                .email(registerVo.getEmail())
                 .password(registerVo.getPassword())
                 .access(0)
                 .build();
         userMapper.insertUser(userEntity);
 
+        UserEntity userEntity1 = userMapper.selectById(userEntity.getId());
+
         return UserVo.builder()
-                .phone(userEntity.getPhone())
-                .id(userEntity.getId()).build();
+                .email(userEntity1.getEmail())
+                .phone(userEntity1.getPhone())
+                .access(userEntity1.getAccess())
+                .build();
     }
 
     @Override
     public UserVo login(String loginNumber, String password) {
-        UserEntity userEntity = userMapper.selectByPhoneAndPassword(loginNumber, password);
+        UserEntity userEntity;
+        if(loginNumber.contains("@")){
+            userEntity = userMapper.selectByEmailAndPassword(loginNumber, password);
+        }else{
+            userEntity = userMapper.selectByPhoneAndPassword(loginNumber, password);
+        }
         if(Objects.nonNull(userEntity)){
             return UserVo.builder()
                     .id(userEntity.getId())
                     .phone(userEntity.getPhone())
                     .address(userEntity.getAddress())
                     .birthday(userEntity.getBirthday())
+                    .access(userEntity.getAccess())
                     .cardId(userEntity.getCardId())
                     .contactName(userEntity.getContactName())
                     .credit(userEntity.getCredit())
@@ -82,7 +101,7 @@ public class UserServiceImpl implements UserService {
                     .realName(userEntity.getRealName())
                     .build();
         }
-        throw new BusinessException("未找到该用户");
+        throw new BusinessException("用户名或密码错误");
     }
 
     /**

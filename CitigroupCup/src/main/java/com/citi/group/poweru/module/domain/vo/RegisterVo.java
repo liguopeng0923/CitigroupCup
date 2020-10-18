@@ -31,9 +31,13 @@ public class RegisterVo {
 //    private String nickname;
 
     //账号（手机号）
-    @NotNull(message = "账号不能为空")
-    @Size(max = 11,min = 11,message = "账号最多为32个字符")
-    private String loginNumber;
+    @NotNull(message = "手机号不能为空")
+    @Size(max = 11,min = 11,message = "手机号应为11位")
+    private String phone;
+
+    //账号（邮箱）
+    @NotNull(message = "邮箱不能为空")
+    private String email;
 
     //密码
     @NotBlank(message = "密码不能为空")
