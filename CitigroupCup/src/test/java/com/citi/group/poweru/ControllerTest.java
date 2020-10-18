@@ -59,7 +59,7 @@ public class ControllerTest {
     @Test
     public void uploadTest(){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        PowerGenerationRecordVo vo = new PowerGenerationRecordVo((long)3,250.0,sdf.format(new Date()),4);
+        PowerGenerationRecordVo vo = new PowerGenerationRecordVo((long)3,50.0,sdf.format(new Date()),4);
         System.out.println(uploaderController.uploadGenerationRecord(vo));
     }
 }
