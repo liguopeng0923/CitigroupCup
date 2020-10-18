@@ -42,8 +42,9 @@ public class UploaderServiceImpl implements UploaderService {
         //更新基点状态
         pointMapper.updatePointTime(powerGenerationRecord.getUploadTime(),powerGenerationRecord.getPointId());
 
+        System.out.println(record);
         PowerGenerationRecordEntity checkRecord = generationMapper.queryRecordById(record.getRecordId());
-
+        System.out.println(checkRecord);
         PowerGenerationRecordDto generationRecordDto = new PowerGenerationRecordDto();
         generationRecordDto.setElectricQuantity(checkRecord.getElectricQuantity());
         generationRecordDto.setPointId(checkRecord.getPointId());

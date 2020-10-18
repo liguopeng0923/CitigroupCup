@@ -48,5 +48,4 @@ public class PowerGenerationRecordEntity {
      */
     @TableField(value = "time_interval")
     private Integer timeInterval;
-
 }

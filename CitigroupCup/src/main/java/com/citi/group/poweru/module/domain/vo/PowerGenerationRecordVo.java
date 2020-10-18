@@ -37,6 +37,5 @@ public class PowerGenerationRecordVo {
     /**
      * 本次发电时间间隔
      */
-    @TableId(value = "time_interval")
     private Integer timeInterval;
 }

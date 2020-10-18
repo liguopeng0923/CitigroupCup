@@ -28,7 +28,15 @@ public interface PowerGenerationMapper {
     public void uploadRecord(PowerGenerationRecordEntity powerGenerationRecord);
 
     @Select("select * from power_generation_info where record_id=#{recordId}")
+    @Results(id="recordMap",value = {
+            @Result(property = "recordId",column = "record_id"),
+            @Result(property = "pointId",column = "point_id"),
+            @Result(property = "electricQuantity",column = "electric_quantity"),
+            @Result(property = "uploadTime",column = "upload_time"),
+            @Result(property = "timeInterval",column = "time_interval")
+    })
     public PowerGenerationRecordEntity queryRecordById(Long recordId);
+
 
     @Select("select "+COLUMNS_2+" from power_generation_info as p,user_point_relation as r where r.user_id=#{userId}")
     public List<PowerGenerationRecordEntity> queryAllRecordById(long userId);

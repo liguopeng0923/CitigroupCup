@@ -1,9 +1,6 @@
 package com.citi.group.poweru;
 
-import com.citi.group.poweru.module.dao.MachineMapper;
-import com.citi.group.poweru.module.dao.PointMapper;
-import com.citi.group.poweru.module.dao.PowerGenerationMapper;
-import com.citi.group.poweru.module.dao.RelationMapper;
+import com.citi.group.poweru.module.dao.*;
 import com.citi.group.poweru.module.domain.dto.QueryRankDto;
 import com.citi.group.poweru.module.domain.entity.PointInfoEntity;
 import com.citi.group.poweru.module.domain.entity.PowerGenerationRecordEntity;
@@ -26,6 +23,9 @@ import java.util.List;
  */
 @SpringBootTest
 public class MapperTest {
+    @Resource
+    private UserMapper userMapper;
+
     @Resource
     private MachineMapper machineMapper;
 
@@ -96,5 +96,16 @@ public class MapperTest {
         entity.setName("2号");
         entity.setStatus("关闭");
         pointMapper.insertPoint(entity);
+    }
+
+    @Test
+    public void queryRecordTest(){
+        System.out.println(powerGenerationMapper.queryRecordById((long)2));
+//        System.out.println(powerGenerationMapper.queryRecordById());
+    }
+
+    @Test
+    public void selectUser(){
+        System.out.println(userMapper.selectById((long)1));
     }
 }

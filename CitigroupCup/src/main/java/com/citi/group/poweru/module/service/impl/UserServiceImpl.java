@@ -165,7 +165,6 @@ public class UserServiceImpl implements UserService {
                     generationPerDay.put(i, dayGenerationOfUser);
                 }
             }
-            System.out.println(generationPerDay);
             QueryRankDto dto=new QueryRankDto();
             //设置当前查询月份
             dto.setMonth(month);
@@ -236,6 +235,9 @@ public class UserServiceImpl implements UserService {
         relationMapper.insertUserAndPointRelation(bindVo.getUserId(),pointInfoEntity.getPointId());
         //检查插入是否成功
         PointInfoEntity checkInfo = pointMapper.queryPointInfo(pointInfoEntity.getPointId());
+        if(Objects.isNull(checkInfo)){
+            throw new BusinessException("绑定失败");
+        }
         PointInfoDto pointInfoDto = new PointInfoDto();
         pointInfoDto.setAddress(checkInfo.getAddress());
         pointInfoDto.setName(checkInfo.getName());
