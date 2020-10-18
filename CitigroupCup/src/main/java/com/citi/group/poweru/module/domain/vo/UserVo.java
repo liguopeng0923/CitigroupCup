@@ -95,4 +95,9 @@ public class UserVo {
      */
     private Double profit;
 
+    /**
+     * 权限
+     */
+    private int access;
+
 }

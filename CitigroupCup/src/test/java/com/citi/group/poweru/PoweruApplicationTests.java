@@ -17,10 +17,12 @@ class PoweruApplicationTests {
     @Test
     void contextLoads() {
         RegisterVo registerVo = RegisterVo.builder()
-                .loginNumber("1234567")
+                .phone("1234567")
+                .email("1072652056@qq.com")
                 .password("222222222")
                 .build();
-        System.out.println(userService.register(registerVo));
+
+        System.out.println(userService.login("1234567","222222222"));
 
 
     }
