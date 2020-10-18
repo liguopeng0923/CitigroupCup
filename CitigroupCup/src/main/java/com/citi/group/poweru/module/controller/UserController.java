@@ -8,6 +8,8 @@ import com.citi.group.poweru.module.domain.vo.QueryRankVo;
 import com.citi.group.poweru.module.domain.vo.RegisterVo;
 import com.citi.group.poweru.module.domain.vo.UserVo;
 import com.citi.group.poweru.module.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +25,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 @Slf4j
+@Api(
+        value = "user",
+        tags = "用户信息"
+)
 public class UserController {
     @Resource
     private UserService userService;
@@ -34,7 +40,7 @@ public class UserController {
      * @return 用户信息
      */
     @GetMapping("/login")
-    public ResponseDTO<UserVo> login(@RequestParam("phone") @Valid String phone, @RequestParam("password") @Valid String password) {
+    public ResponseDTO<UserVo> login(@RequestParam("phone")String phone, @RequestParam("password")String password) {
         log.info("UserController.login phone:{}, password:{}", phone,password);
         UserVo login = userService.login(phone, password);
         return ResponseDTO.successData(login);
@@ -47,7 +53,11 @@ public class UserController {
      * @return 用户信息
      */
     @PostMapping("/register")
-    public ResponseDTO<UserVo> register(@RequestParam("registerVo") @Valid RegisterVo registerVo) {
+    @ApiOperation(
+            value = "用户注册",
+            notes = "用户注册"
+    )
+    public ResponseDTO<UserVo> register(@RequestBody @Valid RegisterVo registerVo) {
         log.info("UserController.register registerVo:{}", registerVo);
         UserVo register = userService.register(registerVo);
         return ResponseDTO.successData(register);
@@ -71,7 +81,7 @@ public class UserController {
      * @return 用户每个月的日发电量的最大值，最小值和平均值，以及对应的日期
      */
     @GetMapping("/queryRank")
-    public ResponseDTO<List<QueryRankDto>> queryGenerationRank(@RequestParam("queryRankVo") @Valid QueryRankVo queryRankVo){
+    public ResponseDTO<List<QueryRankDto>> queryGenerationRank(@RequestBody @Valid QueryRankVo queryRankVo){
         log.info("UserController.queryGenerationRank queryRankVo:{}", queryRankVo);
         List <QueryRankDto> queryResult = userService.queryStatisticalDataOfMonthGeneration(queryRankVo);
         return ResponseDTO.successData(queryResult);
@@ -83,7 +93,7 @@ public class UserController {
      * @return 绑定成功新生成的基站信息
      */
     @PostMapping("/bind")
-    public ResponseDTO<PointInfoDto> bindMachine(@RequestParam("bindVo") @Valid BindVo bindVo){
+    public ResponseDTO<PointInfoDto> bindMachine(@RequestBody @Valid BindVo bindVo){
         log.info("UserController.bindMachine bindVo:{}", bindVo);
         PointInfoDto pointInfoDto = userService.userBindPoint(bindVo);
         return ResponseDTO.successData(pointInfoDto);

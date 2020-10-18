@@ -5,10 +5,7 @@ import com.citi.group.poweru.module.domain.dto.PowerGenerationRecordDto;
 import com.citi.group.poweru.module.domain.vo.PowerGenerationRecordVo;
 import com.citi.group.poweru.module.service.UploaderService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -32,7 +29,7 @@ public class UploaderController {
      * @return 发电记录信息
      */
     @PostMapping("/upload")
-    public ResponseDTO<PowerGenerationRecordDto> uploadGenerationRecord(@RequestParam("record") @Valid PowerGenerationRecordVo powerGenerationRecord){
+    public ResponseDTO<PowerGenerationRecordDto> uploadGenerationRecord(@RequestBody @Valid PowerGenerationRecordVo powerGenerationRecord){
         log.info("UploaderController.uploadGenerationRecord PowerGenerationRecordVo:{}", powerGenerationRecord);
         PowerGenerationRecordDto powerGenerationRecordDto = uploaderService.uploadRecord(powerGenerationRecord);
         return ResponseDTO.successData(powerGenerationRecordDto);
