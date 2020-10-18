@@ -206,7 +206,7 @@ public class UserServiceImpl implements UserService {
      * @param bindVo 绑定信息
      */
     @Override
-    public void userBindPoint(BindVo bindVo){
+    public PointInfoDto userBindPoint(BindVo bindVo){
         Long machineId = machineMapper.selectMachineId(bindVo.getActivationCode());
         PointInfoEntity pointInfoEntity = new PointInfoEntity();
         pointInfoEntity.setName(bindVo.getName());
@@ -214,8 +214,15 @@ public class UserServiceImpl implements UserService {
         pointInfoEntity.setMachineId(machineId);
         pointInfoEntity.setAddress(bindVo.getAddress());
         pointMapper.insertPoint(pointInfoEntity);
-
         relationMapper.insertUserAndPointRelation(bindVo.getUserId(),pointInfoEntity.getPointId());
+        //检查插入是否成功
+        PointInfoEntity checkInfo = pointMapper.queryPointInfo(pointInfoEntity.getPointId());
+        PointInfoDto pointInfoDto = new PointInfoDto();
+        pointInfoDto.setAddress(checkInfo.getAddress());
+        pointInfoDto.setName(checkInfo.getName());
+        pointInfoDto.setStatus(checkInfo.getStatus());
+        pointInfoDto.setTotalGeneration(0.0);
+        return pointInfoDto;
     }
 
 }

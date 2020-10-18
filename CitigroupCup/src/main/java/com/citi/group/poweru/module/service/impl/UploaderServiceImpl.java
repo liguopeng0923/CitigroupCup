@@ -2,6 +2,7 @@ package com.citi.group.poweru.module.service.impl;
 
 import com.citi.group.poweru.module.dao.PointMapper;
 import com.citi.group.poweru.module.dao.PowerGenerationMapper;
+import com.citi.group.poweru.module.domain.dto.PowerGenerationRecordDto;
 import com.citi.group.poweru.module.domain.entity.PowerGenerationRecordEntity;
 import com.citi.group.poweru.module.domain.vo.PowerGenerationRecordVo;
 import com.citi.group.poweru.module.service.UploaderService;
@@ -30,7 +31,7 @@ public class UploaderServiceImpl implements UploaderService {
      * @param powerGenerationRecord 本次发电记录的信息
      */
     @Override
-    public void uploadRecord(PowerGenerationRecordVo powerGenerationRecord) {
+    public PowerGenerationRecordDto uploadRecord(PowerGenerationRecordVo powerGenerationRecord) {
         PowerGenerationRecordEntity record = new PowerGenerationRecordEntity();
         record.setElectricQuantity(powerGenerationRecord.getElectricQuantity());
         record.setPointId(powerGenerationRecord.getPointId());
@@ -40,5 +41,13 @@ public class UploaderServiceImpl implements UploaderService {
         generationMapper.uploadRecord(record);
         //更新基点状态
         pointMapper.updatePointTime(powerGenerationRecord.getUploadTime(),powerGenerationRecord.getPointId());
+
+        PowerGenerationRecordEntity checkRecord = generationMapper.queryRecordById(record.getRecordId());
+
+        PowerGenerationRecordDto generationRecordDto = new PowerGenerationRecordDto();
+        generationRecordDto.setElectricQuantity(checkRecord.getElectricQuantity());
+        generationRecordDto.setPointId(checkRecord.getPointId());
+        generationRecordDto.setUploadTime(checkRecord.getUploadTime());
+        return generationRecordDto;
     }
 }

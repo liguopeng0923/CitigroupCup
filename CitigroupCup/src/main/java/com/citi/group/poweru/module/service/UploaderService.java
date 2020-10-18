@@ -1,5 +1,6 @@
 package com.citi.group.poweru.module.service;
 
+import com.citi.group.poweru.module.domain.dto.PowerGenerationRecordDto;
 import com.citi.group.poweru.module.domain.entity.PowerGenerationRecordEntity;
 import com.citi.group.poweru.module.domain.vo.PowerGenerationRecordVo;
 
@@ -11,5 +12,5 @@ import com.citi.group.poweru.module.domain.vo.PowerGenerationRecordVo;
  */
 public interface UploaderService {
 
-    public void uploadRecord(PowerGenerationRecordVo powerGenerationRecord);
+    public PowerGenerationRecordDto uploadRecord(PowerGenerationRecordVo powerGenerationRecord);
 }

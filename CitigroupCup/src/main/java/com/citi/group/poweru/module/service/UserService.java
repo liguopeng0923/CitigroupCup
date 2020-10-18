@@ -3,18 +3,13 @@ package com.citi.group.poweru.module.service;
 import com.citi.group.poweru.module.domain.dto.PointInfoDto;
 import com.citi.group.poweru.module.domain.dto.PowerGenerationRecordDto;
 import com.citi.group.poweru.module.domain.dto.QueryRankDto;
-import com.citi.group.poweru.module.domain.entity.PowerGenerationRecordEntity;
 import com.citi.group.poweru.module.domain.vo.BindVo;
 import com.citi.group.poweru.module.domain.vo.QueryRankVo;
 import com.citi.group.poweru.module.domain.vo.RegisterVo;
 import com.citi.group.poweru.module.domain.vo.UserVo;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author 李国鹏
@@ -34,5 +29,5 @@ public interface UserService {
 
     List<PointInfoDto> queryPointsInfoByUser(Long userId);
 
-    void userBindPoint(BindVo bindVo);
+    PointInfoDto userBindPoint(BindVo bindVo);
 }

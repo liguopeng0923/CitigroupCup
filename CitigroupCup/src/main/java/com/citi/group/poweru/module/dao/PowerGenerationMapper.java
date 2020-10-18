@@ -24,7 +24,11 @@ public interface PowerGenerationMapper {
     String PROPS = "#{pointId}, #{electricQuantity}, #{uploadTime,jdbcType=DATE}, #{timeInterval}";
 
     @Insert("insert into power_generation_info (" + COLUMNS_1 + ") values (" + PROPS + ")")
+    @Options(useGeneratedKeys=true, keyProperty="recordId", keyColumn="record_id")
     public void uploadRecord(PowerGenerationRecordEntity powerGenerationRecord);
+
+    @Select("select * from power_generation_info where record_id=#{recordId}")
+    public PowerGenerationRecordEntity queryRecordById(Long recordId);
 
     @Select("select "+COLUMNS_2+" from power_generation_info as p,user_point_relation as r where r.user_id=#{userId}")
     public List<PowerGenerationRecordEntity> queryAllRecordById(long userId);

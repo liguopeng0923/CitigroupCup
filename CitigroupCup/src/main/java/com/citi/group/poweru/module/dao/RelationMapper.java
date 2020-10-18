@@ -44,4 +44,5 @@ public interface RelationMapper {
      */
     @Select("select point_id from user_point_relation where user_id=#{userId}")
     public List<Long> queryPointIdByUser(Long userId);
+
 }
