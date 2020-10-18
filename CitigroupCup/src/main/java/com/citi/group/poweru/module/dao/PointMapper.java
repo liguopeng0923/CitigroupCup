@@ -24,4 +24,7 @@ public interface PointMapper {
     @Insert("INSERT INTO point_info (`name`, `address`, `status`, `upload_time`, `machine_id`) VALUES (#{name},#{address},#{status},#{upload_time},#{machineId})")
     @Options(useGeneratedKeys=true, keyProperty="pointId", keyColumn="point_id")
     public void insertPoint(PointInfoEntity pointInfoEntity);
+
+    @Select("select point_id from point_info where machine_id=#{machineId}")
+    public Long queryPointByMachineId(Long machineId);
 }

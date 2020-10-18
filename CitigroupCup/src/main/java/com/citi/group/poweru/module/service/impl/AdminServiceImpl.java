@@ -1,5 +1,6 @@
 package com.citi.group.poweru.module.service.impl;
 
+import com.citi.group.poweru.common.exception.BusinessException;
 import com.citi.group.poweru.module.dao.PointMapper;
 import com.citi.group.poweru.module.dao.PowerGenerationMapper;
 import com.citi.group.poweru.module.dao.RelationMapper;
@@ -15,6 +16,7 @@ import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author 施武轩
@@ -49,8 +51,7 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public List<PointInfoDto> queryPointInfoByAdmin(Long adminId) {
-        List<PointInfoDto> result = new ArrayList<PointInfoDto>();
-//        List<Long> pointIdList = new ArrayList<Long>();
+        List<PointInfoDto> result = new ArrayList<>();
         List<Long> userIdList = relationMapper.queryUserIdByAdmin(adminId);
         for (long userId:userIdList) {
             List<Long> pointIdList = relationMapper.queryPointIdByUser(userId);
@@ -58,13 +59,23 @@ public class AdminServiceImpl implements AdminService {
             for (long pointId:pointIdList){
                 PointInfoDto dto = new PointInfoDto();
                 PointInfoEntity infoEntity = pointMapper.queryPointInfo(pointId);
+                if(Objects.isNull(infoEntity)){
+                    throw new BusinessException("用户基点绑定信息有误，请检查");
+                }
                 dto.setName(infoEntity.getName());
                 dto.setUserName(userName);
                 dto.setAddress(infoEntity.getAddress());
-                dto.setTotalGeneration(powerGenerationMapper.getTotalGenerationPerPoint(pointId));
+                if(Objects.isNull(powerGenerationMapper.getTotalGenerationPerPoint(pointId))){
+                    dto.setTotalGeneration(0.0);
+                }
+                else {
+                    dto.setTotalGeneration(powerGenerationMapper.getTotalGenerationPerPoint(pointId));
+                }
                 dto.setStatus(infoEntity.getStatus());
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                dto.setUploadTime(sdf.format(infoEntity.getUpload_time()));
+                if(!Objects.isNull(infoEntity.getUpload_time())){
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    dto.setUploadTime(sdf.format(infoEntity.getUpload_time()));
+                }
                 result.add(dto);
             }
         }

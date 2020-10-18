@@ -108,4 +108,10 @@ public class MapperTest {
     public void selectUser(){
         System.out.println(userMapper.selectById((long)1));
     }
+
+
+    @Test
+    public void selectPointByMachineId(){
+        System.out.println(pointMapper.queryPointByMachineId((long)1004));
+    }
 }

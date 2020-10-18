@@ -207,12 +207,22 @@ public class UserServiceImpl implements UserService {
         for (long id:pointIdList){
             PointInfoDto dto = new PointInfoDto();
             PointInfoEntity infoEntity = pointMapper.queryPointInfo(id);
+            if(Objects.isNull(infoEntity)){
+                throw new BusinessException("基点绑定信息有误，请重新绑定");
+            }
             dto.setName(infoEntity.getName());
             dto.setAddress(infoEntity.getAddress());
-            dto.setTotalGeneration(generationMapper.getTotalGenerationPerPoint(id));
+            if(Objects.isNull(generationMapper.getTotalGenerationPerPoint(id))){
+                dto.setTotalGeneration(0.0);
+            }
+            else {
+                dto.setTotalGeneration(generationMapper.getTotalGenerationPerPoint(id));
+            }
             dto.setStatus(infoEntity.getStatus());
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            dto.setUploadTime(sdf.format(infoEntity.getUpload_time()));
+            if(!Objects.isNull(infoEntity.getUpload_time())){
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                dto.setUploadTime(sdf.format(infoEntity.getUpload_time()));
+            }
             result.add(dto);
         }
         return result;
@@ -226,6 +236,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public PointInfoDto userBindPoint(BindVo bindVo){
         Long machineId = machineMapper.selectMachineId(bindVo.getActivationCode());
+        //检查当前机器是否已绑定
+        if(Objects.isNull(pointMapper.queryPointByMachineId(machineId))){
+            throw new BusinessException("当前机器已绑定，请确认激活码是否无误");
+        }
         PointInfoEntity pointInfoEntity = new PointInfoEntity();
         pointInfoEntity.setName(bindVo.getName());
         pointInfoEntity.setStatus("关闭");

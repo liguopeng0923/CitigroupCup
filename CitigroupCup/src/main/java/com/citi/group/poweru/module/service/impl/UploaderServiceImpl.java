@@ -1,5 +1,6 @@
 package com.citi.group.poweru.module.service.impl;
 
+import com.citi.group.poweru.common.exception.BusinessException;
 import com.citi.group.poweru.module.dao.PointMapper;
 import com.citi.group.poweru.module.dao.PowerGenerationMapper;
 import com.citi.group.poweru.module.domain.dto.PowerGenerationRecordDto;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Objects;
 
 /**
  * @author 施武轩
@@ -42,9 +44,10 @@ public class UploaderServiceImpl implements UploaderService {
         //更新基点状态
         pointMapper.updatePointTime(powerGenerationRecord.getUploadTime(),powerGenerationRecord.getPointId());
 
-        System.out.println(record);
         PowerGenerationRecordEntity checkRecord = generationMapper.queryRecordById(record.getRecordId());
-        System.out.println(checkRecord);
+        if(Objects.isNull(checkRecord)){
+            throw new BusinessException("上传记录失败");
+        }
         PowerGenerationRecordDto generationRecordDto = new PowerGenerationRecordDto();
         generationRecordDto.setElectricQuantity(checkRecord.getElectricQuantity());
         generationRecordDto.setPointId(checkRecord.getPointId());

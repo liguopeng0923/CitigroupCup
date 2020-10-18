@@ -32,7 +32,7 @@ public class ServiceTest {
 
     @Test
     public void userServiceTest(){
-        System.out.println(userService.queryPointsInfoByUser((long)1));
+        System.out.println(userService.queryPointsInfoByUser((long)3));
     }
 
 
