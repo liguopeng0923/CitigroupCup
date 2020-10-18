@@ -65,40 +65,40 @@ public class UserServiceImpl implements UserService {
                 .build();
         userMapper.insertUser(userEntity);
 
-        UserEntity userEntity1 = userMapper.selectById(userEntity.getId());
+        UserVo userVo = userMapper.selectById(userEntity.getId());
 
         return UserVo.builder()
-                .email(userEntity1.getEmail())
-                .phone(userEntity1.getPhone())
-                .access(userEntity1.getAccess())
+                .email(userVo.getEmail())
+                .phone(userVo.getPhone())
+                .access(userVo.getAccess())
                 .build();
     }
 
     @Override
     public UserVo login(String loginNumber, String password) {
-        UserEntity userEntity;
+        UserVo userVo;
         if(loginNumber.contains("@")){
-            userEntity = userMapper.selectByEmailAndPassword(loginNumber, password);
+            userVo = userMapper.selectByEmailAndPassword(loginNumber, password);
         }else{
-            userEntity = userMapper.selectByPhoneAndPassword(loginNumber, password);
+            userVo = userMapper.selectByPhoneAndPassword(loginNumber, password);
         }
-        if(Objects.nonNull(userEntity)){
+        if(Objects.nonNull(userVo)){
             return UserVo.builder()
-                    .id(userEntity.getId())
-                    .phone(userEntity.getPhone())
-                    .address(userEntity.getAddress())
-                    .birthday(userEntity.getBirthday())
-                    .access(userEntity.getAccess())
-                    .cardId(userEntity.getCardId())
-                    .contactName(userEntity.getContactName())
-                    .credit(userEntity.getCredit())
-                    .email(userEntity.getEmail())
-                    .gender(userEntity.getGender())
-                    .information(userEntity.getInformation())
-                    .name(userEntity.getName())
-                    .photo(userEntity.getPhoto())
-                    .profit(userEntity.getProfit())
-                    .realName(userEntity.getRealName())
+                    .id(userVo.getId())
+                    .phone(userVo.getPhone())
+                    .address(userVo.getAddress())
+                    .birthday(userVo.getBirthday())
+                    .access(userVo.getAccess())
+                    .cardId(userVo.getCardId())
+                    .contactName(userVo.getContactName())
+                    .credit(userVo.getCredit())
+                    .email(userVo.getEmail())
+                    .gender(userVo.getGender())
+                    .information(userVo.getInformation())
+                    .name(userVo.getName())
+                    .photo(userVo.getPhoto())
+                    .profit(userVo.getProfit())
+                    .realName(userVo.getRealName())
                     .build();
         }
         throw new BusinessException("用户名或密码错误");

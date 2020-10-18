@@ -25,23 +25,32 @@ public interface UserMapper extends BaseMapper<UserEntity> {
             "#{access}, #{credit}, #{profit}, #{gender}, #{birthday}, #{photo}, #{password}";
 
     @Select("select * from user where id = #{id}")
-    UserEntity selectById(Long id);
+    @ResultMap(value = "user")
+    UserVo selectById(Long id);
 
     @Select("select * from user where phone = #{phone}")
-    UserEntity selectByPhone(String phone);
+    @Results(id = "user", value = {
+            @Result(property = "realName", column = "real_name"),
+            @Result(property = "cardId", column = "card_id"),
+            @Result(property = "contactName", column = "contact_name")
+    })
+    UserVo selectByPhone(String phone);
 
     @Select("select * from user where email = #{email}")
-    UserEntity selectByEmail(String email);
+    @ResultMap(value = "user")
+    UserVo selectByEmail(String email);
 
     @Insert("insert into user (" +COLUMNS+ ") values (" +PROPS+ ")")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
     void insertUser(UserEntity userEntity);
 
     @Select("select * from user where phone = #{phone} and password = #{password}")
-    UserEntity selectByPhoneAndPassword(@Param("phone") String phone, @Param("password") String password);
+    @ResultMap(value = "user")
+    UserVo selectByPhoneAndPassword(@Param("phone") String phone, @Param("password") String password);
 
     @Select("select * from user where email = #{email} and password = #{password}")
-    UserEntity selectByEmailAndPassword(@Param("email") String email, @Param("password") String password);
+    @ResultMap(value = "user")
+    UserVo selectByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 
     @Select("select real_name from user where id=#{userId}")
     String getUserName(Long userId);
