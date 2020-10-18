@@ -43,12 +43,21 @@ public class FeedbackImpl implements FeedbackService {
     @Override
     public FeedbackVo queryFeedbackByFeedbackId(int feedbackId) throws Exception {
         FeedbackVo feedbackVo = feedbackMapper.selectByFeedbackId(feedbackId);
-        System.out.println(feedbackVo);
         if (Objects.isNull(feedbackVo)){
             String errorInfo = "Feedback_id为" + feedbackVo.toString() + "的反馈不存在，请检查";
             throw new Exception(errorInfo);
         } else{
             return feedbackVo;
+        }
+    }
+
+    @Override
+    public void addFeedback(FeedbackVo feedbackVo) throws Exception {
+        if(!Objects.isNull(feedbackVo)) {
+            feedbackMapper.addFeedback(feedbackVo);
+        }else{
+            String errorInfo = "Feedback:"+ feedbackVo.toString()+"插入失败";
+            throw new Exception(errorInfo);
         }
     }
 }

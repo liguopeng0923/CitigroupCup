@@ -9,4 +9,5 @@ public interface FeedbackService {
 
     List<Integer> queryPointInfoByUser(int userId) throws Exception;
     FeedbackVo queryFeedbackByFeedbackId(int feedbackId) throws Exception;
+    void addFeedback(FeedbackVo feedbackVo) throws Exception;
 }
