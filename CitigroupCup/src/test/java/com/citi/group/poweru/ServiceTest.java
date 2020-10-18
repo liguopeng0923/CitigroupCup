@@ -40,10 +40,10 @@ public class ServiceTest {
     public void uploadTest(){
         PowerGenerationRecordVo generationRecord = new PowerGenerationRecordVo();
         generationRecord.setElectricQuantity(100.0);
-        generationRecord.setPointId((long)3);
+        generationRecord.setPointId((long)9);
         generationRecord.setTimeInterval(4);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        generationRecord.setUploadTime(sdf.format(new Date()));
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        generationRecord.setUploadTime("2020-10-18 20:00:09");
         uploaderService.uploadRecord(generationRecord);
     }
 

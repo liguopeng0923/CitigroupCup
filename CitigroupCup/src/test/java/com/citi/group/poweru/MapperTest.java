@@ -114,4 +114,15 @@ public class MapperTest {
     public void selectPointByMachineId(){
         System.out.println(pointMapper.queryPointByMachineId((long)1004));
     }
+
+    @Test
+    public void updatePointStatusTest(){
+        pointMapper.updatePointStatus((long)9,"正常");
+    }
+
+    @Test
+    public void queryPointUploadTimeTest()
+    {
+        System.out.println(pointMapper.queryPointUploadTime((long) 1));
+    }
 }

@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.sound.midi.Soundbank;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -34,6 +38,15 @@ public class UploaderServiceImpl implements UploaderService {
      */
     @Override
     public PowerGenerationRecordDto uploadRecord(PowerGenerationRecordVo powerGenerationRecord) {
+        //检查日期格式是否正确
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date newDate;
+        try {
+            newDate = sdf.parse(powerGenerationRecord.getUploadTime());
+        }
+        catch (ParseException e){
+            throw new BusinessException("上传记录日期格式错误失败，请按照'yyyy-MM-dd HH:mm:ss'上传");
+        }
         PowerGenerationRecordEntity record = new PowerGenerationRecordEntity();
         record.setElectricQuantity(powerGenerationRecord.getElectricQuantity());
         record.setPointId(powerGenerationRecord.getPointId());
@@ -41,13 +54,27 @@ public class UploaderServiceImpl implements UploaderService {
         record.setUploadTime(powerGenerationRecord.getUploadTime());
         //上传记录
         generationMapper.uploadRecord(record);
-        //更新基点状态
-        pointMapper.updatePointTime(powerGenerationRecord.getUploadTime(),powerGenerationRecord.getPointId());
-
         PowerGenerationRecordEntity checkRecord = generationMapper.queryRecordById(record.getRecordId());
-        if(Objects.isNull(checkRecord)){
+        //检查是否上传成功
+        if(Objects.isNull(checkRecord)) {
             throw new BusinessException("上传记录失败");
         }
+
+        //本次上传记录时间与上一次基点更新的间隔和标准间隔不一致（超过误差范围）时显示状态异常
+        Date oldDate = pointMapper.queryPointUploadTime(powerGenerationRecord.getPointId());
+        //毫秒为单位
+        long inaccurate = (newDate.getTime()-oldDate.getTime())-powerGenerationRecord.getTimeInterval()*3600000;
+        if (inaccurate<5000&&inaccurate>-5000){
+            //更新基点状态为正常
+            pointMapper.updatePointStatus(powerGenerationRecord.getPointId(),"正常");
+        }
+        else {
+            //超出误差，更新基点状态为异常
+            pointMapper.updatePointStatus(powerGenerationRecord.getPointId(), "异常");
+        }
+
+        //更新基点时间
+        pointMapper.updatePointTime(powerGenerationRecord.getUploadTime(),powerGenerationRecord.getPointId());
         PowerGenerationRecordDto generationRecordDto = new PowerGenerationRecordDto();
         generationRecordDto.setElectricQuantity(checkRecord.getElectricQuantity());
         generationRecordDto.setPointId(checkRecord.getPointId());

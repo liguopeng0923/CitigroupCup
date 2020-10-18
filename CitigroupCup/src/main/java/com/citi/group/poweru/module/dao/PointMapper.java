@@ -27,4 +27,10 @@ public interface PointMapper {
 
     @Select("select point_id from point_info where machine_id=#{machineId}")
     public Long queryPointByMachineId(Long machineId);
+
+    @Update("update point_info set status=#{status} where point_id=#{pointId}")
+    public void updatePointStatus(@Param("pointId") Long pointId, @Param("status") String status);
+
+    @Select("select upload_time from point_info where point_id=#{pointId}")
+    public Date queryPointUploadTime(Long pointId);
 }
