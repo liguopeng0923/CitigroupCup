@@ -8,3 +8,5 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 159263
+#   url: jdbc:mysql://localhost:3306/citi_group?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+#   password: 0407
