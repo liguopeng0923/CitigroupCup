@@ -6,10 +6,7 @@ import com.citi.group.poweru.module.domain.dto.FeedbackInfoDto;
 import com.citi.group.poweru.module.domain.vo.FeedbackVo;
 import com.citi.group.poweru.module.service.FeedbackService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -28,10 +25,16 @@ public class FeedbackController {
         List<Integer> pointInfos = feedbackService.queryPointInfoByUser(userId);
         return ResponseDTO.successData(pointInfos);
     }
-    @GetMapping("queryFeedbackById")
+    @GetMapping("/queryFeedbackById")
     public ResponseDTO<FeedbackVo> queryFeedbackById(@RequestParam("feedbackId") @Valid int feedbackId) throws Exception {
         log.info("FeedbackController.queryFeedbackById feedbackId:{}", feedbackId);
         FeedbackVo feedbackVo = feedbackService.queryFeedbackByFeedbackId(feedbackId);
+        return ResponseDTO.successData(feedbackVo);
+    }
+    @PostMapping("/addFeedback")
+    public ResponseDTO<FeedbackVo> addFeedback(@RequestBody @Valid FeedbackVo feedbackVo) throws Exception {
+        log.info("FeedbackController.addFeedback FeedbackVo:{}", feedbackVo);
+        feedbackService.addFeedback(feedbackVo);
         return ResponseDTO.successData(feedbackVo);
     }
 
