@@ -237,7 +237,7 @@ public class UserServiceImpl implements UserService {
     public PointInfoDto userBindPoint(BindVo bindVo){
         Long machineId = machineMapper.selectMachineId(bindVo.getActivationCode());
         //检查当前机器是否已绑定
-        if(Objects.isNull(pointMapper.queryPointByMachineId(machineId))){
+        if(!Objects.isNull(pointMapper.queryPointByMachineId(machineId))){
             throw new BusinessException("当前机器已绑定，请确认激活码是否无误");
         }
         PointInfoEntity pointInfoEntity = new PointInfoEntity();

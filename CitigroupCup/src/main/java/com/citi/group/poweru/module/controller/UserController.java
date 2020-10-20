@@ -8,8 +8,6 @@ import com.citi.group.poweru.module.domain.vo.QueryRankVo;
 import com.citi.group.poweru.module.domain.vo.RegisterVo;
 import com.citi.group.poweru.module.domain.vo.UserVo;
 import com.citi.group.poweru.module.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,10 +23,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 @Slf4j
-@Api(
-        value = "user",
-        tags = "用户信息"
-)
 public class UserController {
     @Resource
     private UserService userService;
@@ -53,10 +47,6 @@ public class UserController {
      * @return 用户信息
      */
     @PostMapping("/register")
-    @ApiOperation(
-            value = "用户注册",
-            notes = "用户注册"
-    )
     public ResponseDTO<UserVo> register(@RequestBody @Valid RegisterVo registerVo) {
         log.info("UserController.register registerVo:{}", registerVo);
         UserVo register = userService.register(registerVo);

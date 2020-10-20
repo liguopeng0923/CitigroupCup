@@ -19,13 +19,13 @@ public class FeedbackController {
     @Resource
     private FeedbackService feedbackService;
 
-    @GetMapping("/queryFeedbackIdByUserId")
+    @PostMapping("/queryFeedbackIdByUserId")
     public ResponseDTO<List<Integer>> queryFeedbackIdByUserId(@RequestParam("userId") @Valid int userId) throws Exception {
         log.info("FeedbackController.queryFeedbackIdByUserId userId:{}", userId);
         List<Integer> pointInfos = feedbackService.queryPointInfoByUser(userId);
         return ResponseDTO.successData(pointInfos);
     }
-    @GetMapping("/queryFeedbackById")
+    @PostMapping("/queryFeedbackById")
     public ResponseDTO<FeedbackVo> queryFeedbackById(@RequestParam("feedbackId") @Valid int feedbackId) throws Exception {
         log.info("FeedbackController.queryFeedbackById feedbackId:{}", feedbackId);
         FeedbackVo feedbackVo = feedbackService.queryFeedbackByFeedbackId(feedbackId);

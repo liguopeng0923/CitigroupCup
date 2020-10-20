@@ -62,17 +62,21 @@ public class UploaderServiceImpl implements UploaderService {
 
         //本次上传记录时间与上一次基点更新的间隔和标准间隔不一致（超过误差范围）时显示状态异常
         Date oldDate = pointMapper.queryPointUploadTime(powerGenerationRecord.getPointId());
-        //毫秒为单位
-        long inaccurate = (newDate.getTime()-oldDate.getTime())-powerGenerationRecord.getTimeInterval()*3600000;
-        if (inaccurate<5000&&inaccurate>-5000){
-            //更新基点状态为正常
+        //如果之前未上传过记录
+        if(Objects.isNull(oldDate)){
             pointMapper.updatePointStatus(powerGenerationRecord.getPointId(),"正常");
         }
         else {
-            //超出误差，更新基点状态为异常
-            pointMapper.updatePointStatus(powerGenerationRecord.getPointId(), "异常");
+            //毫秒为单位
+            long inaccurate = (newDate.getTime() - oldDate.getTime()) - powerGenerationRecord.getTimeInterval() * 3600000;
+            if (inaccurate < 5000 && inaccurate > -5000) {
+                //更新基点状态为正常
+                pointMapper.updatePointStatus(powerGenerationRecord.getPointId(), "正常");
+            } else {
+                //超出误差，更新基点状态为异常
+                pointMapper.updatePointStatus(powerGenerationRecord.getPointId(), "异常");
+            }
         }
-
         //更新基点时间
         pointMapper.updatePointTime(powerGenerationRecord.getUploadTime(),powerGenerationRecord.getPointId());
         PowerGenerationRecordDto generationRecordDto = new PowerGenerationRecordDto();

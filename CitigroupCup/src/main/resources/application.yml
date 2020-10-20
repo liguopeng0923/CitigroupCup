@@ -4,3 +4,7 @@ spring:
   application:
     name: citigroup
   datasource:
+    url: jdbc:mysql://150.158.163.84:3306/poweru?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: powerU0

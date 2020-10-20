@@ -52,14 +52,14 @@ public class ControllerTest {
 
     @Test
     public void bindTest(){
-        BindVo vo = new BindVo((long)3,"001", "南昌","s005");
+        BindVo vo = new BindVo((long)3,"002", "南昌南","s006");
         System.out.println(userController.bindMachine(vo));
     }
 
     @Test
     public void uploadTest(){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        PowerGenerationRecordVo vo = new PowerGenerationRecordVo((long)3,50.0,sdf.format(new Date()),4);
+        PowerGenerationRecordVo vo = new PowerGenerationRecordVo((long)13,300.0,"2020-10-20 14:00:00",4);
         System.out.println(uploaderController.uploadGenerationRecord(vo));
     }
 }

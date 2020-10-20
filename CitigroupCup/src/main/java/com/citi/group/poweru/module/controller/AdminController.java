@@ -4,10 +4,7 @@ import com.citi.group.poweru.common.domain.ResponseDTO;
 import com.citi.group.poweru.module.domain.dto.PointInfoDto;
 import com.citi.group.poweru.module.service.AdminService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -26,7 +23,7 @@ public class AdminController {
     @Resource
     private AdminService adminService;
 
-    @GetMapping("/queryPoints")
+    @PostMapping("/queryPoints")
     public ResponseDTO<List<PointInfoDto>> queryPointInfo(@RequestParam("adminId") @Valid Long adminId){
         log.info("AdminController.queryPointInfo adminId:{}", adminId);
         List<PointInfoDto> pointInfos = adminService.queryPointInfoByAdmin(adminId);
