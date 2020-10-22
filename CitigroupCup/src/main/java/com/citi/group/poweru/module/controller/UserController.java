@@ -11,6 +11,7 @@ import com.citi.group.poweru.module.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
@@ -33,7 +34,7 @@ public class UserController {
      * @param password 用户密码
      * @return 用户信息
      */
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseDTO<UserVo> login(@RequestParam("phone")String phone, @RequestParam("password")String password) {
         log.info("UserController.login phone:{}, password:{}", phone,password);
         UserVo login = userService.login(phone, password);
@@ -58,7 +59,7 @@ public class UserController {
      * @param userId 用户id
      * @return 基点信息列表
      */
-    @GetMapping("/queryPoints")
+    @PostMapping("/queryPoints")
     public ResponseDTO<List<PointInfoDto>> queryPointInfo(@RequestParam("userId") @Valid Long userId){
         log.info("UserController.queryPointInfo userId:{}", userId);
         List<PointInfoDto> pointInfos = userService.queryPointsInfoByUser(userId);
@@ -70,7 +71,7 @@ public class UserController {
      * @param queryRankVo 查询提供的信息，包括用户编号和查询年份
      * @return 用户每个月的日发电量的最大值，最小值和平均值，以及对应的日期
      */
-    @GetMapping("/queryRank")
+    @PostMapping("/queryRank")
     public ResponseDTO<List<QueryRankDto>> queryGenerationRank(@RequestBody @Valid QueryRankVo queryRankVo){
         log.info("UserController.queryGenerationRank queryRankVo:{}", queryRankVo);
         List <QueryRankDto> queryResult = userService.queryStatisticalDataOfMonthGeneration(queryRankVo);
