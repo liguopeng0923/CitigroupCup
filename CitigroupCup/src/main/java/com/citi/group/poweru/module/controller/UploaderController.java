@@ -16,6 +16,8 @@ import javax.validation.Valid;
  * @date 2020/10/17 20:47
  * @lastEditor
  */
+
+@CrossOrigin
 @RestController
 @RequestMapping("/uploader")
 @Slf4j

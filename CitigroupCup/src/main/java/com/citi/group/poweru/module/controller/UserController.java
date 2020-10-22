@@ -21,6 +21,8 @@ import java.util.List;
  * @version 1.0.0
  * @date 2020/10/17 18:35
  */
+
+@CrossOrigin
 @RestController
 @RequestMapping("/user")
 @Slf4j

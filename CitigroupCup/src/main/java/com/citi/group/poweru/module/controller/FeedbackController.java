@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/feedback")
 @Slf4j

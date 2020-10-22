@@ -16,6 +16,7 @@ import java.util.List;
  * @date 2020/10/17 20:44
  * @lastEditor
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/admin")
 @Slf4j
