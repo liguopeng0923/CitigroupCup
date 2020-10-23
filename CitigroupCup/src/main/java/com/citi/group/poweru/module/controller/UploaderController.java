@@ -19,7 +19,7 @@ import javax.validation.Valid;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/uploader")
+@RequestMapping("/api/uploader")
 @Slf4j
 public class UploaderController {
     @Resource

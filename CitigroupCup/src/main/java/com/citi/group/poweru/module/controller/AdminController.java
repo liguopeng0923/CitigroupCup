@@ -18,7 +18,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/api/admin")
 @Slf4j
 public class AdminController {
     @Resource
