@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 import javax.sound.midi.Soundbank;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -68,7 +69,7 @@ public class UploaderServiceImpl implements UploaderService {
         }
         else {
             //毫秒为单位
-            long inaccurate = (newDate.getTime() - oldDate.getTime()) - powerGenerationRecord.getTimeInterval() * 3600000;
+            long inaccurate = (new Date().getTime() - oldDate.getTime()) - powerGenerationRecord.getTimeInterval() * 3600000;
             if (inaccurate < 5000 && inaccurate > -5000) {
                 //更新基点状态为正常
                 pointMapper.updatePointStatus(powerGenerationRecord.getPointId(), "正常");

@@ -37,7 +37,7 @@ public class UserController {
      * @return 用户信息
      */
     @PostMapping("/login")
-    public ResponseDTO<UserVo> login(@RequestParam("phone")String phone, @RequestParam("password")String password) {
+    public ResponseDTO<UserVo> login(@RequestParam(value = "phone",required = false)String phone, @RequestParam("password")String password) {
         log.info("UserController.login phone:{}, password:{}", phone,password);
         UserVo login = userService.login(phone, password);
         return ResponseDTO.successData(login);
