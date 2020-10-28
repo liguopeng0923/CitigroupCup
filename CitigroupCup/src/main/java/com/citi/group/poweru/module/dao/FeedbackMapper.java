@@ -1,6 +1,7 @@
 package com.citi.group.poweru.module.dao;
 
 
+import com.citi.group.poweru.module.domain.dto.FeedbackInfoDto;
 import com.citi.group.poweru.module.domain.vo.FeedbackVo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -26,5 +27,8 @@ public interface FeedbackMapper {
     @Insert("insert into feedback_info ("+COLUMNS_1+") values ("+ PROPS+")")
     @Options(useGeneratedKeys=true, keyProperty="feedbackId", keyColumn="feedback_id")
     public void addFeedback(FeedbackVo feedbackVo);
-
+    @Update("update feedback_info set solution=#{solution}, update_time=#{update_time} where feedback_id=#{feedback_id}")
+    public void updateFeedbackSolution(FeedbackInfoDto feedbackInfoDto);
+    @Update("update feedback_info set solution=#{solution}, user_id=#{user_id}, information=#{feedbackInfo}, update_time=#{updateTime} where feedback_id=#{feedback_id}")
+    public void updateFeedbackDetail(FeedbackInfoDto feedbackInfoDto);
 }

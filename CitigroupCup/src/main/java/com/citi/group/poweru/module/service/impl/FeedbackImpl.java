@@ -3,10 +3,8 @@ package com.citi.group.poweru.module.service.impl;
 import com.citi.group.poweru.module.dao.FeedbackMapper;
 import com.citi.group.poweru.module.dao.UserMapper;
 import com.citi.group.poweru.module.domain.dto.FeedbackInfoDto;
-import com.citi.group.poweru.module.domain.entity.FeedbackEntity;
 import com.citi.group.poweru.module.domain.vo.FeedbackVo;
 import com.citi.group.poweru.module.service.FeedbackService;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,4 +58,24 @@ public class FeedbackImpl implements FeedbackService {
             throw new Exception(errorInfo);
         }
     }
+
+    @Override
+    public void updateFeedbackSolution(FeedbackInfoDto feedbackInfoDto) throws Exception {
+        if (!Objects.isNull(feedbackInfoDto)){
+            feedbackMapper.updateFeedbackSolution(feedbackInfoDto);
+        }else{
+            String errorInfo = "Feedback:"+ feedbackInfoDto.toString()+"更新solution失败";
+            throw new Exception(errorInfo);
+        }
+    }
+    @Override
+    public void updateFeedbackDetail(FeedbackInfoDto feedbackInfoDto) throws Exception {
+        if (!Objects.isNull(feedbackInfoDto)){
+            feedbackMapper.updateFeedbackDetail(feedbackInfoDto);
+        }else{
+            String errorInfo = "Feedback:"+ feedbackInfoDto.toString()+"更新反馈信息失败";
+            throw new Exception(errorInfo);
+        }
+    }
+
 }

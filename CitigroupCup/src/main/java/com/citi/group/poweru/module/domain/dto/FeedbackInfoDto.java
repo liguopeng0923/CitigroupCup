@@ -17,15 +17,15 @@ public class FeedbackInfoDto {
     /**
      * 反馈信息的标识
      */
-    private int feedbackId;
+    private int feedback_id;
     /**
      * 反馈者标识
      */
-    private int userId;
+    private int user_id;
     /**
      * 反馈内容是否解决
      */
-    private int solute;
+    private int solution;
     /**
      * 反馈内容
      */

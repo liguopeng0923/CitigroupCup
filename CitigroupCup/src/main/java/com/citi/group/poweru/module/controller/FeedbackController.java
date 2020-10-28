@@ -37,6 +37,18 @@ public class FeedbackController {
         feedbackService.addFeedback(feedbackVo);
         return ResponseDTO.successData(feedbackVo);
     }
+    @PutMapping("/updateFeedbackSolution")
+    public ResponseDTO<FeedbackInfoDto> updateFeedbackSolution(@RequestBody @Valid FeedbackInfoDto feedbackInfoDto) throws Exception{
+        log.info("FeedbackController.updateFeedbackSolution FeedbackVo:{}", feedbackInfoDto);
+        feedbackService.updateFeedbackSolution(feedbackInfoDto);
+        return ResponseDTO.successData(feedbackInfoDto);
+    }
+    @PutMapping("/updateFeedbackDetail")
+    public ResponseDTO<FeedbackInfoDto> updateFeedbackDetail(@RequestBody @Valid FeedbackInfoDto feedbackInfoDto) throws Exception{
+        log.info("FeedbackController.updateFeedbackDetail FeedbackVo:{}", feedbackInfoDto);
+        feedbackService.updateFeedbackDetail(feedbackInfoDto);
+        return ResponseDTO.successData(feedbackInfoDto);
+    }
 
 
 
