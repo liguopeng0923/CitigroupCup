@@ -78,4 +78,15 @@ public class FeedbackImpl implements FeedbackService {
         }
     }
 
+    @Override
+    public void deleteFeedbackById(int feedbackId) throws Exception {
+        FeedbackVo feedbackVo = queryFeedbackByFeedbackId(feedbackId);
+        if (!Objects.isNull(feedbackVo)){
+            feedbackMapper.deleteFeedbackById(feedbackId);
+        }else {
+            String errorInfo = "feedbackId:"+ feedbackId+"对应的feedback不存在";
+            throw new Exception(errorInfo);
+        }
+    }
+
 }

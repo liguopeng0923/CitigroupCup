@@ -12,4 +12,5 @@ public interface FeedbackService {
     void addFeedback(FeedbackVo feedbackVo) throws Exception;
     void updateFeedbackSolution(FeedbackInfoDto feedbackInfoDto) throws Exception;
     void updateFeedbackDetail(FeedbackInfoDto feedbackInfoDto) throws Exception;
+    void deleteFeedbackById(int feedbackId) throws Exception;
 }

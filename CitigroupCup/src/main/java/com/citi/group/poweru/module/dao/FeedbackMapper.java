@@ -31,4 +31,6 @@ public interface FeedbackMapper {
     public void updateFeedbackSolution(FeedbackInfoDto feedbackInfoDto);
     @Update("update feedback_info set solution=#{solution}, user_id=#{user_id}, information=#{feedbackInfo}, update_time=#{updateTime} where feedback_id=#{feedback_id}")
     public void updateFeedbackDetail(FeedbackInfoDto feedbackInfoDto);
+    @Delete("delete from feedback_info where feedback_id=#{feedbackId}")
+    void deleteFeedbackById(int feedbackId);
 }

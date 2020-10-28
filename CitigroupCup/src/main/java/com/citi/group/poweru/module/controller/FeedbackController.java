@@ -39,15 +39,21 @@ public class FeedbackController {
     }
     @PutMapping("/updateFeedbackSolution")
     public ResponseDTO<FeedbackInfoDto> updateFeedbackSolution(@RequestBody @Valid FeedbackInfoDto feedbackInfoDto) throws Exception{
-        log.info("FeedbackController.updateFeedbackSolution FeedbackVo:{}", feedbackInfoDto);
+        log.info("FeedbackController.updateFeedbackSolution FeedbackDto:{}", feedbackInfoDto);
         feedbackService.updateFeedbackSolution(feedbackInfoDto);
         return ResponseDTO.successData(feedbackInfoDto);
     }
     @PutMapping("/updateFeedbackDetail")
     public ResponseDTO<FeedbackInfoDto> updateFeedbackDetail(@RequestBody @Valid FeedbackInfoDto feedbackInfoDto) throws Exception{
-        log.info("FeedbackController.updateFeedbackDetail FeedbackVo:{}", feedbackInfoDto);
+        log.info("FeedbackController.updateFeedbackDetail FeedbackDto:{}", feedbackInfoDto);
         feedbackService.updateFeedbackDetail(feedbackInfoDto);
         return ResponseDTO.successData(feedbackInfoDto);
+    }
+    @DeleteMapping("/deleteFeedbackById")
+    public ResponseDTO<Integer> deleteFeedbackById(@RequestParam("feedback_id") @Valid int feedbackId) throws Exception{
+        log.info("FeedbackController.updateFeedbackDetail feedbackId:{}", feedbackId);
+        feedbackService.deleteFeedbackById(feedbackId);
+        return ResponseDTO.successData(feedbackId);
     }
 
 
