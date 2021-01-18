@@ -1,0 +1,139 @@
+package com.citigroup.whuamm.common.dto;
+
+import com.alibaba.fastjson.JSON;
+import com.citigroup.whuamm.common.code.ResponseCodeConst;
+import com.citigroup.whuamm.common.exception.BusinessException;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
+
+/**
+ * @author 李国鹏
+ * @version 1.0.0
+ * @date 2021/1/18 12:27
+ */
+@Data
+@AllArgsConstructor
+public class ResponseDTO<T> {
+
+    protected Integer code;
+
+    protected String message;
+
+    protected Boolean success;
+
+    protected T data;
+
+    public ResponseDTO() {
+    }
+
+    public ResponseDTO(ResponseCodeConst responseCodeConst, String message) {
+        this.code = responseCodeConst.getCode();
+        this.message = message;
+        this.success = responseCodeConst.isSuccess();
+    }
+
+    public ResponseDTO(ResponseCodeConst responseCodeConst, T data) {
+        super();
+        this.code = responseCodeConst.getCode();
+        this.message = responseCodeConst.getMsg();
+        this.data = data;
+        this.success = responseCodeConst.isSuccess();
+    }
+
+    public ResponseDTO(ResponseCodeConst responseCodeConst, T data, String message) {
+        super();
+        this.code = responseCodeConst.getCode();
+        this.message = message;
+        this.data = data;
+        this.success = responseCodeConst.isSuccess();
+    }
+
+    private ResponseDTO(ResponseCodeConst responseCodeConst) {
+        this.code = responseCodeConst.getCode();
+        this.message = responseCodeConst.getMsg();
+        this.success = responseCodeConst.isSuccess();
+    }
+
+    public ResponseDTO(ResponseDTO<T> responseDTO) {
+        this.code = responseDTO.getCode();
+        this.message = responseDTO.getMessage();
+        this.data = null;
+        this.success = responseDTO.isSuccess();
+    }
+
+    public static <T> ResponseDTO<T> success() {
+        return new ResponseDTO<T>(ResponseCodeConst.SUCCESS);
+    }
+
+    public static <T> ResponseDTO<T> successData(T data, String message) {
+        return new ResponseDTO<T>(ResponseCodeConst.SUCCESS, data, message);
+    }
+
+    public static <T> ResponseDTO<T> successData(T data) {
+        return new ResponseDTO<T>(ResponseCodeConst.SUCCESS, data);
+    }
+
+    public static <T> ResponseDTO<T> successMsg(String message) {
+        return new ResponseDTO<T>(ResponseCodeConst.SUCCESS, message);
+    }
+
+
+    public static <T> ResponseDTO<T> wrap(ResponseCodeConst codeConst) {
+        return new ResponseDTO<>(codeConst);
+    }
+
+    public static <T> ResponseDTO<T> wrap(ResponseCodeConst codeConst, T t) {
+        return new ResponseDTO<T>(codeConst, t);
+    }
+
+    public static <T> ResponseDTO<T> wrap(ResponseCodeConst codeConst, String message) {
+        return new ResponseDTO<T>(codeConst, message);
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public ResponseDTO<T> setMessage(String message) {
+        this.message = message;
+        return this;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public ResponseDTO<T> setCode(Integer code) {
+        this.code = code;
+        return this;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public ResponseDTO<T> setData(T data) {
+        this.data = data;
+        return this;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
+    }
+}
