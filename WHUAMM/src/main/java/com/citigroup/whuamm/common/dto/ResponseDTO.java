@@ -1,7 +1,7 @@
 package com.citigroup.whuamm.common.dto;
 
 import com.alibaba.fastjson.JSON;
-import com.citigroup.whuamm.common.code.ResponseCodeConst;
+import com.citigroup.whuamm.common.code.StatusCode;
 import com.citigroup.whuamm.common.exception.BusinessException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,118 +22,110 @@ import java.util.Objects;
 @AllArgsConstructor
 public class ResponseDTO<T> {
 
-    protected Integer code;
+    @Getter
+    @Setter
+    private boolean result;
 
-    protected String message;
+    @Getter
+    @Setter
+    private Object data;
 
-    protected Boolean success;
+    @Getter
+    @Setter
+    private String message;
 
-    protected T data;
+    @Getter
+    @Setter
+    private int status;
 
-    public ResponseDTO() {
-    }
+    @Getter
+    @Setter
+    private long time = (new Date()).getTime();
 
-    public ResponseDTO(ResponseCodeConst responseCodeConst, String message) {
-        this.code = responseCodeConst.getCode();
-        this.message = message;
-        this.success = responseCodeConst.isSuccess();
-    }
-
-    public ResponseDTO(ResponseCodeConst responseCodeConst, T data) {
-        super();
-        this.code = responseCodeConst.getCode();
-        this.message = responseCodeConst.getMsg();
-        this.data = data;
-        this.success = responseCodeConst.isSuccess();
-    }
-
-    public ResponseDTO(ResponseCodeConst responseCodeConst, T data, String message) {
-        super();
-        this.code = responseCodeConst.getCode();
+    public ResponseDTO(boolean result,int status,String message,Object data)
+    {
+        this.result = result;
+        this.status = status;
         this.message = message;
         this.data = data;
-        this.success = responseCodeConst.isSuccess();
     }
 
-    private ResponseDTO(ResponseCodeConst responseCodeConst) {
-        this.code = responseCodeConst.getCode();
-        this.message = responseCodeConst.getMsg();
-        this.success = responseCodeConst.isSuccess();
+    public ResponseDTO(){}
+
+    public Map<String,Object> map()
+    {
+        Map<String,Object> responseMap = new LinkedHashMap<>();
+        responseMap.put("result",this.result);
+        responseMap.put("message",this.message);
+        responseMap.put("status",this.status);
+        responseMap.put("time",this.getTime());
+        if(Objects.nonNull(this.data))
+        {
+            responseMap.put("data",this.data);
+        }
+        return responseMap;
     }
 
-    public ResponseDTO(ResponseDTO<T> responseDTO) {
-        this.code = responseDTO.getCode();
-        this.message = responseDTO.getMessage();
-        this.data = null;
-        this.success = responseDTO.isSuccess();
+    public static ResponseDTO.Builder successBuilder()
+    {
+        return new ResponseDTO.Builder(true, StatusCode.getCode(200),StatusCode.getMessage(200));
     }
 
-    public static <T> ResponseDTO<T> success() {
-        return new ResponseDTO<T>(ResponseCodeConst.SUCCESS);
+    public static ResponseDTO.Builder failedBuilder()
+    {
+        return new ResponseDTO.Builder(false,StatusCode.getCode(700),StatusCode.getMessage(700));
     }
 
-    public static <T> ResponseDTO<T> successData(T data, String message) {
-        return new ResponseDTO<T>(ResponseCodeConst.SUCCESS, data, message);
+    public static ResponseDTO.Builder builder(boolean result,int status,String message)
+    {
+        return new ResponseDTO.Builder(result,status,message);
     }
 
-    public static <T> ResponseDTO<T> successData(T data) {
-        return new ResponseDTO<T>(ResponseCodeConst.SUCCESS, data);
+    public static ResponseDTO.Builder failedBuilder(BusinessException businessException)
+    {
+        return new ResponseDTO.Builder(false,businessException.getCode(),businessException.getMessage());
     }
 
-    public static <T> ResponseDTO<T> successMsg(String message) {
-        return new ResponseDTO<T>(ResponseCodeConst.SUCCESS, message);
-    }
+    public static class Builder
+    {
+        private boolean result;
+        private String message;
+        private int status;
+        private Map<String,Object> data;
 
+        private Builder()
+        {
+            this.data = new LinkedHashMap<>();
+        }
 
-    public static <T> ResponseDTO<T> wrap(ResponseCodeConst codeConst) {
-        return new ResponseDTO<>(codeConst);
-    }
+        private Builder(boolean result,int status,String message)
+        {
+            this.data = new LinkedHashMap<>();
+            this.result = result;
+            this.status = status;
+            this.message = message;
+        }
 
-    public static <T> ResponseDTO<T> wrap(ResponseCodeConst codeConst, T t) {
-        return new ResponseDTO<T>(codeConst, t);
-    }
+        public ResponseDTO.Builder addMessage(String message)
+        {
+            this.message = message;
+            return this;
+        }
 
-    public static <T> ResponseDTO<T> wrap(ResponseCodeConst codeConst, String message) {
-        return new ResponseDTO<T>(codeConst, message);
-    }
+        public ResponseDTO.Builder addData(String key,Object data)
+        {
+            this.data.put(key,data);
+            return this;
+        }
 
-    public String getMessage() {
-        return message;
-    }
+        public ResponseDTO.Builder addDataValue(Object data)
+        {
+            return this.addData("value",data);
+        }
 
-    public ResponseDTO<T> setMessage(String message) {
-        this.message = message;
-        return this;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public ResponseDTO<T> setCode(Integer code) {
-        this.code = code;
-        return this;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public ResponseDTO<T> setData(T data) {
-        this.data = data;
-        return this;
-    }
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    @Override
-    public String toString() {
-        return JSON.toJSONString(this);
+        public Map<String,Object> map()
+        {
+            return (new ResponseDTO(this.result,this.status,this.message,this.data)).map();
+        }
     }
 }
