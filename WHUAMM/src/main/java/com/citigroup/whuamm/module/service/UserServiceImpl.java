@@ -35,11 +35,9 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Map<String, Object> userLogin(String userName, String password) {
-        UserEntity userEntity = userDao.findByRealNameAndPassword(userName,password);
-        if(Objects.isNull(userEntity))
-        {
-            throw new BusinessException("用户名或密码错误");
-        }
+        UserEntity userEntity = Objects
+                .requireNonNull(userDao.findByRealNameAndPassword(userName,password), "用户名或密码错误");
+
         return UserDetailMapper.buildMap(UserData.convert(userEntity,new User()));
     }
 
