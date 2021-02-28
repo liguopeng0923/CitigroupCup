@@ -6,7 +6,7 @@ spring:
     url: jdbc:mysql://localhost:3306/whuamm?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: root
+    password: swx5027189
     # druid 配置
     dbType: mysql   # 指定数据库类型 mysql
     initialSize: 3  # 启动初始化连接数量
